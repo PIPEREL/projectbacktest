@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %} {% block title %}Set{% endblock %} {% block body %}
+<h1>Set</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>img</th>
+            <td><img src=" {{asset( 'img/set/') ~ set.img}} " alt=" "> </td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ set.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ set.nom }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ set.description }}</td>
+        </tr>
+        <tr>
+            <th>Libelle</th>
+            <td>{{ set.libelle }}</td>
+        </tr>
+        <tr>
+            <th>Date_parution</th>
+            <td>{{ set.dateParution ? set.dateParution|date('d-m-Y') : '' }}</td>
+        </tr>
+
+    </tbody>
+</table>
+<br><br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Attribut</th>
+            <th>Niveau</th>
+            <th>Archetype</th>
+            <th>Rarete</th>
+            <th>Stock</th>
+            <th>Prix</th>
+            <th>Img</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carte in cartes %}
+        <tr>
+            <td>{{ carte.id }}</td>
+            <td>{{ carte.nom }}</td>
+            <td>{{ carte.type }}</td>
+            <td>{{ carte.attribut }}</td>
+            <td>{{ carte.niveau }}</td>
+            <td>{{ carte.archetype }}</td>
+            <td>{{ carte.rarete }}</td>
+            <td>{{ carte.stock }}</td>
+            <td>{{ carte.prix }}</td>
+            <td><img src="{{asset('img/carte/') ~ carte.img}} " alt="" style="width: 5rem; height: 8rem;"> </td>
+            <td>
+                <a href="{{ path('carte_show', {'id': carte.id}) }}">show</a>
+                <a href="{{ path('carte_edit', {'id': carte.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="11">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<a href="{{ path( 'set_index') }} ">back to list</a>
+
+<a href="{{ path( 'set_edit', { 'id': set.id}) }} ">edit</a> {{ include('admin/set/_delete_form.html.twig') }} {% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %} {% block title %}Hello CartePanierController!{% endblock %} {% block body %}
+
+<div class="example-wrapper">
+    <h1>ci li panier</h1>
+
+    {% if panier | length >0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>produit</th>
+                <th>img </th>
+                <th>prix</th>
+                <th>qte</th>
+                <th>total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in panier %}
+            <tr>
+                <td>{{ article.carte.nom }}</td>
+                <td><img src="{{asset('img/carte/') ~ article.carte.img}}" alt="" style="width: 5rem; height: 5rem"> </td>
+                <td>{{ article.carte.prix }}</td>
+                <td> <a href="{{path('moinsarticle', {'id' : article.carte.id}) }}">-</a> {{ article.quantite }}
+                    <a href="{{path('ajoutarticle', {'id' : article.carte.id}) }}">+</a>
+                </td>
+                <td>{{ article.carte.prix * article.quantite }}</td>
+                <td>
+                    <a href="{{path('retirearticle',{'id': article.carte.id}) }}" class="btn">supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>total</td>
+                <td>{{total}}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    {% else %}
+    <p>surprise ci vide</p>
+    {% endif %}
+    <a href="{{ path('home')}}">retour faire achats</a>
+</div>
+{% endblock %}

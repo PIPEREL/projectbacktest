@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %} {% block title %}Carte index{% endblock %} {% block body %}
+<h1>Carte index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Attribut</th>
+            <th>Niveau</th>
+            <th>Archetype</th>
+            <th>Rarete</th>
+            <th>Stock</th>
+            <th>Prix</th>
+            <th>Img</th>
+            <th>set</th>
+            <th>actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for carte in cartes %}
+        <tr>
+            <td>{{ carte.id }}</td>
+            <td>{{ carte.nom }}</td>
+            <td>{{ carte.type }}</td>
+            <td>{{ carte.attribut }}</td>
+            <td>{{ carte.niveau }}</td>
+            <td>{{ carte.archetype }}</td>
+            <td>{{ carte.rarete }}</td>
+            <td>{{ carte.stock }}</td>
+            <td>{{ carte.prix }}</td>
+            <td><img src="{{asset('img/carte/') ~ carte.img}} " alt="" style="width: 5rem; height: 5rem;"> </td>
+            <td>{{carte.setId.nom}}</td>
+            <td>
+                <a href="{{ path('carte_show', {'id': carte.id}) }}">show</a>
+                <a href="{{ path('carte_edit', {'id': carte.id}) }}">edit</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="11">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('carte_new') }}">Create new</a> {% endblock %}

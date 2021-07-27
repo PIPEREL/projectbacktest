@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %} {% block title %}acceuil{% endblock %} {% block body %}
+
+
+<div class="example-wrapper">
+    {% for set in sets %}
+    <a href="{{ path('set', {'id': set.id}) }}"> <img src="{{asset('img/set/') ~ set.img}} " alt=""></a> {% endfor %}
+</div>
+{% endblock %}

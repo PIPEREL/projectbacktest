@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %} {% block title %}Set index{% endblock %} {% block body %}
+<h1>Set index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Libelle</th>
+            <th>Date_parution</th>
+            <th>img</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for set in sets %}
+        <tr>
+            <td>{{ set.id }}</td>
+            <td>{{ set.nom }}</td>
+            <td>{{ set.description|u.truncate(100,'...') }}</td>
+            <td>{{ set.libelle }}</td>
+            <td>{{ set.dateParution ? set.dateParution|date('d-m-Y') : '' }}</td>
+            <td><img src="{{asset('img/set/') ~ set.img}} " alt=""> </td>
+            <td>
+                <a href="{{ path('set_show', {'id': set.id}) }}">show</a>
+                <a href="{{ path('set_edit', {'id': set.id}) }}">edit</a> {{ include('admin/set/_delete_form.html.twig') }}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('set_new') }}">Create new</a> {% endblock %}

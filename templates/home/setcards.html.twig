@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %} {% block title %}acceuil{% endblock %} {% block body %}
+
+
+<div class="example-wrapper">
+    {% for carte in cartes %}
+    <tr>
+        <td>{{ carte.id }}</td>
+        <td>{{ carte.nom }}</td>
+        <td>{{ carte.stock }}</td>
+        <td>{{ carte.prix }}</td>
+        <td>{{carte.libelle}}</td>
+        <td><img src="{{asset('img/carte/') ~ carte.img}} " alt="" style="width: 5rem; height: 5rem;"> </td>
+        <td><a href="{{path('ajoutarticle', {'id' : carte.id}) }}">ajouter</a></td>
+    </tr>
+    {% endfor %}
+</div>
+{% endblock %}
