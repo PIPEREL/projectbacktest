@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}Hello CartePanierController!{% endblock %} {% block body %}
 
 <div class="example-wrapper">
-    <h1>ci li panier</h1>
+    <h1>ci li panier </h1>
 
     {% if panier | length >0 %}
     <table class="table">
@@ -42,6 +42,7 @@
     {% else %}
     <p>surprise ci vide</p>
     {% endif %}
-    <a href="{{ path('home')}}">retour faire achats</a>
+    <a href="{{ path('home')}}">retour faire achats</a> {{ include('carte_panier/_form.html.twig') }}
+    <a href="{{path('panier')}}">payer</a>
 </div>
 {% endblock %}

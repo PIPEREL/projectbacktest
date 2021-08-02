@@ -32,12 +32,13 @@ class UserType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'required' => false,
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'un mot de passe svp',
-                    ]),
+                    // new NotBlank([
+                    //     'message' => 'un mot de passe svp',
+                    // ]),
                     // new Length([
                     //     'min' => 6,
                     //     'minMessage' => 'Your password should be at least {{ limit }} characters',

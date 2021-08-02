@@ -13,7 +13,6 @@ class HomeController extends AbstractController
     #[Route('', name: 'home')]
     public function index(SetRepository $setRepository): Response
     {
-
         $sets = $setRepository->findNouveau();
         return $this->render('home/index.html.twig', ["sets"=>$sets,
 
