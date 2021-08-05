@@ -116,4 +116,13 @@ class SetController extends AbstractController
             'cartes' => $cartes
         ]);
     }
-}
+
+    #[Route('set', name: 'set_print', methods: ['GET'])]
+    public function setchoice(SetRepository $setRepository): Response
+    {
+        $sets = $setRepository->findby([],["date_parution" => 'DESC']);
+        return $this->render('home/set.html.twig', [
+                'sets' => $sets
+            ]);
+        }
+    }

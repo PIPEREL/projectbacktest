@@ -25,19 +25,18 @@ class PanierService
         $this->session->set('livraison', $livraison);
     }
 
-    public function add(int $id)
+    public function add(int $id, int $quantity=1)
     {
-
         $panier = $this->session->get("panier", []);
         $stock = $this->carteRepository->find($id)->getStock();
         if (!empty($panier[$id])) {
             if ($panier[$id] < $stock) {
-                $panier[$id]++;
+            $panier[$id]+= $quantity;
             } else if ($panier[$id] > $stock) {
                 $panier[$id] = $stock;
             }
         } else {
-            $panier[$id] = 1;
+            $panier[$id] = $quantity;
         }
         $this->session->set('panier', $panier);
     }
@@ -81,9 +80,10 @@ class PanierService
         return $panierWithData;
     }
 
-    public function getTotal(): float
+    public function getTotal(): array
     {
         $total = 0;
+        $totalLivraison = 0;
 
         foreach ($this->getPanier() as $article) {
             $total += $article['carte']->getPrix() * $article['quantite'];
@@ -96,11 +96,25 @@ class PanierService
         }
         $test = $this->session->get('livraison');
         if ($test['typeLivraison'] == "tracked") {
-            $total += 10;
+            $totalLivraison = $total +10;
         } else {
-            $total += 5;
+            $totalLivraison = $total + 5;
         }
-
-        return $total;
+        
+        $totals["total"] = $total;
+        $totals["totalLivraison"] = $totalLivraison;
+        return $totals;
     }
+
+    public function getQteTotal(): int
+    {
+        $qte = 0;
+        foreach ($this->getPanier() as $article) {
+            $qte += $article['quantite'];
+        }
+        return $qte;
+
+    }
+
+
 }

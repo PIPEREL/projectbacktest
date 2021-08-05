@@ -110,20 +110,4 @@ class Commande
         return $this->panier;
     }
 
-    public function setPanier(?Panier $panier): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($panier === null && $this->panier !== null) {
-            $this->panier->setCommande(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($panier !== null && $panier->getCommande() !== $this) {
-            $panier->setCommande($this);
-        }
-
-        $this->panier = $panier;
-
-        return $this;
-    }
 }

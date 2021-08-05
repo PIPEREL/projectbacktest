@@ -30,15 +30,16 @@ class Panier
      */
     private $user;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Commande::class, inversedBy="panier", cascade={"persist", "remove"})
-     */
-    private $commande;
 
     /**
-     * @ORM\OneToMany(targetEntity=CartePanier::class, mappedBy="panier", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CartePanier::class, mappedBy="panier", orphanRemoval=true, cascade={"persist","remove"})
      */
     private $cartePaniers;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $etat;
 
     public function __construct()
     {
@@ -74,17 +75,6 @@ class Panier
         return $this;
     }
 
-    public function getCommande(): ?Commande
-    {
-        return $this->commande;
-    }
-
-    public function setCommande(?Commande $commande): self
-    {
-        $this->commande = $commande;
-
-        return $this;
-    }
 
     /**
      * @return Collection|CartePanier[]
@@ -112,6 +102,18 @@ class Panier
                 $cartePanier->setPanier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

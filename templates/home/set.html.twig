@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %} {% block title %}sets{% endblock %} {% block body %}
+<section class=" p-4 flex flex-wrap justify-center gap-1">
+    {% for set in sets %}
+    <article class="py-3 m-2  bg-purple-100 hover:bg-purple-200 border-2 hover:border-gray-500 shadow-2xl">
+        <a href="{{ path( 'set', { 'id': set.id}) }} ">
+            <img class="w-44 h-44" src="{{asset( 'img/set/') ~ set.img}} ">
+            <div class="flex justify-center mt-2">
+                <p class="w-32 text-center ">{{ set.nom }} {{ set.libelle }}</p>
+            </div>
+        </a>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

@@ -1,17 +1,36 @@
 {% extends 'base.html.twig' %} {% block title %}acceuil{% endblock %} {% block body %}
 
 
-<div class="example-wrapper">
-    {% for carte in cartes %}
-    <tr>
-        <td>{{ carte.id }}</td>
-        <td>{{ carte.nom }}</td>
-        <td>{{ carte.stock }}</td>
-        <td>{{ carte.prix }}</td>
-        <td>{{carte.libelle}}</td>
-        <td><img src="{{asset('img/carte/') ~ carte.img}} " alt="" style="width: 5rem; height: 5rem;"> </td>
-        <td><a href="{{path('ajoutarticle', {'id' : carte.id}) }}">ajouter</a></td>
-    </tr>
-    {% endfor %}
+<div class="example-wrapper bg-gray-100">
+    <section class="my-4 flex flex-wrap justify-center gap-4">
+        {% for carte in cartes %}
+        <article class="text-center flex flex-col items-center py-3 px-2 bg-purple-100 hover:bg-purple-200 border-2 hover:border-gray-500 shadow-xl">
+            <img class="w-40" <img src="{{asset('img/carte/') ~ carte.img}}">
+            <div class="flex flex-col flex-grow my-2" href="#">
+                <div class="flex flex-col flex-grow justify-center">
+                    <p class="w-44 font-medium hover:underline "> {{carte.nom}} </p>
+                </div>
+                <div class="flex flex-col justify-end mt-2">
+                    <p class="">{{carte.libelle}}</p>
+                    <hr class="m-0">
+                    <div class="mt-3 flex justify-center gap-3">
+                        <p class=" text-red-500 font-medium">{{carte.prix}}$</p>
+                        <select name="nombre">
+                            {% for i in 0.. carte.stock %}
+                            <option value="{{i}}">{{i}}</option> 
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <a href="{{path('ajoutarticle', {'id' : carte.id})}}">
+                        <button class="w-5/12 self-center bg-purple-500 hover:bg-purple-700 text-white  mt-4 py-1 rounded">
+                        ajouter
+                    </button>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+        {% endfor %}
+    </section>
 </div>
 {% endblock %}
