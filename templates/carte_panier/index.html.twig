@@ -29,8 +29,8 @@
                 <input class="mx-2 border text-center w-8" type="text" value="{{ article.quantite }}">
                 <a href="{{path('ajoutarticle', {'id' : article.carte.id}) }}"><i class="fas fa-plus"></i></a>
             </div>
-            <span class="text-center w-1/5 font-semibold text-sm">{{article.carte.prix}}</span>
-            <span class="text-center w-1/5 font-semibold text-sm">{{ article.carte.prix * article.quantite }}</span>
+            <span class="text-center w-1/5 font-semibold text-sm">{{article.carte.prix}} $</span>
+            <span class="text-center w-1/5 font-semibold text-sm">{{ article.carte.prix * article.quantite }} $</span>
         </div>{% endfor %} {% else %}
         <p>le panier est vide</p>
         {% endif %}

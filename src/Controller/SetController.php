@@ -99,6 +99,11 @@ class SetController extends AbstractController
     public function delete(Request $request, Set $set): Response
     {
         if ($this->isCsrfTokenValid('delete'.$set->getId(), $request->request->get('_token'))) {
+            $settodelete = $set->getImg();
+            if ($settodelete !== null){
+                $cheminsettodelete = $this->getParameter('set_folder') . '/' . $settodelete;
+                unlink($cheminsettodelete);
+            } 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($set);
             $entityManager->flush();

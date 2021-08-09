@@ -15,6 +15,7 @@
                     <hr class="m-0">
                     <div class="mt-3 flex justify-center gap-3">
                         <p class=" text-red-500 font-medium">{{carte.prix}}$</p>
+                        {# <input type="hidden" name="id" value="{{carte.id}}"> #}
                         <select name="nombre">
                             {% for i in 0.. carte.stock %}
                             <option value="{{i}}">{{i}}</option> 

@@ -94,6 +94,11 @@ class CarteController extends AbstractController
     public function delete(Request $request, Carte $carte): Response
     {
         if ($this->isCsrfTokenValid('delete' . $carte->getId(), $request->request->get('_token'))) {
+            $cartetodelete = $carte->getImg();
+            if ($cartetodelete !== null){
+                $chemincartetodelete = $this->getParameter('carte_folder') . '/' . $cartetodelete;
+                unlink($chemincartetodelete);
+            } 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($carte);
             $entityManager->flush();
